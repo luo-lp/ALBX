@@ -1,9 +1,12 @@
 $(function () {
     $('.btn-primary').on('click', function () {
-        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
-        if (!reg.test($('#email'))) {
-            alert("邮箱格式不对");
-            return false;
+        if($('#email').val().trim().length===0){
+            alert('请输入用户名')
+            return
+        }
+        if($('#password').val().trim().length===0){
+            alert('请输入密码')
+            return
         }
         let USN = $('#email').val().trim()
         let PSW = $('#password').val().trim()
@@ -16,8 +19,8 @@ $(function () {
             },
             success: function (res) {
                 if (res.code === 200) {
-                    alert(res.msg);
-                    location.href = '/admin/index'
+                    // alert(res.msg);
+                    location.href = '/admin/index.html'
                 } else {
                     alert(res.msg);
                 }

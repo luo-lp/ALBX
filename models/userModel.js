@@ -18,10 +18,11 @@ exports.userModel = (USN, callback) => {
     // 调用Mysql模块
     // 返回操作结果
     //创建sql语句
-    const sql = `SELECT * FROM user WHERE USN=${USN}`
+    // const sql = `SELECT * FROM users WHERE email="admin@zce.me"`
+    const sql = `SELECT * FROM users WHERE email="${USN}"`
     //执行sql语句
     conn.query(sql, (err, result) => {
         if (err) console.log('获取数据失败' + err.message);
-        callback(result)
+        callback(result,err)
     })
 }
