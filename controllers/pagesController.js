@@ -1,57 +1,71 @@
-// 客户展示页
-exports.getIndex=(req,res)=>{
-    res.render('index')
+// 这个模块主要用于返回用户所请求的页面
+var querystring = require('querystring')
+// 约定：所有的后台页面请求都添加/admin
+// 前面页面
+exports.getIndexPage = (req, res) => {
+    res.render('index.ejs')
 }
-exports.getDetail=(req,res)=>{
-    res.render('detail')
+exports.getDetailPage = (req, res) => {
+    res.render('detail.ejs')
 }
-exports.getList=(req,res)=>{
-    res.render('list')
-}
-// 后台管理页
-exports.getgetAdminIndexList=(req,res)=>{
-    res.render('admin/index')
-}
-
-exports.getAdminCategories=(req,res)=>{
-    res.render('admin/categories')
-}
-exports.getAdminLogin=(req,res)=>{
-    res.render('admin/login')
-}
-exports.getAdminComments=(req,res)=>{
-    res.render('admin/comments')
+exports.getListPage = (req, res) => {
+    res.render('list.ejs')
 }
 
-//-----------------
-exports.getAdminNavMenus=(req,res)=>{
-    res.render('admin/nav-menus')
+// 后台管理页面
+exports.getAdminIndexPage = (req, res) => {
+    // 进行登陆状态的验证
+    // var mycookie = querystring.parse(req.headers.cookie)
+    // if(mycookie.isLogin && mycookie.isLogin == 'true'){
+    //     res.render('admin/index.ejs')
+    // }else{
+    //     // res.render('admin/login.ejs')
+    //     // 重定向：以响应头的方式来实现
+    //     // 重定向：让url重新指向一个新的值，本质上让url或者路由有一个变化
+    //     res.writeHead(301,{
+    //         'Location':'/admin/login'
+    //     })
+    //     res.end()
+    // }
+    if (req.session.isLogin && req.session.isLogin == 'true') {
+        res.render('admin/index.ejs')
+    } else {
+        res.writeHead(301, {
+            'Location': '/admin/login'
+        })
+        res.end()
+    }
 }
-
-exports.getAdminPasswordReset=(req,res)=>{
-    res.render('admin/password-reset')
+exports.getAdminCategoriesPage = (req, res) => {
+    res.render('admin/categories.ejs')
 }
-
-exports.getAdminPostAdd=(req,res)=>{
-    res.render('admin/post-add')
+exports.getAdminLoginPage = (req, res) => {
+    res.render('admin/login.ejs')
 }
-
-exports.getAdminPosts=(req,res)=>{
-    res.render('admin/posts')
+exports.getCommentsPage = (req, res) => {
+    res.render('admin/comments.ejs')
 }
-
-exports.getAdminProfile=(req,res)=>{
-    res.render('admin/profile')
+exports.getNavMenusPage = (req, res) => {
+    res.render('admin/nav-menus.ejs')
 }
-
-exports.getAdminSettings=(req,res)=>{
-    res.render('admin/settings')
+exports.getPasswordResetPage = (req, res) => {
+    res.render('admin/password-reset.ejs')
 }
-
-exports.getAdminSlides=(req,res)=>{
-    res.render('admin/slides')
+exports.getPostAddPage = (req, res) => {
+    res.render('admin/post-add.ejs')
 }
-
-exports.getAdminUsers=(req,res)=>{
-    res.render('admin/users')
+exports.getPostsPage = (req, res) => {
+    res.render('admin/posts.ejs')
+}
+exports.getProfilePage = (req, res) => {
+    res.render('admin/profile.ejs')
+}
+exports.getSettingsPage = (req, res) => {
+    res.render('admin/settings.ejs')
+}
+exports.getSlidesPage = (req, res) => {
+    res.render('admin/slides.ejs')
+}
+exports.getUsersPage = (req, res) => {
+    res.render('admin/users.ejs')
 }

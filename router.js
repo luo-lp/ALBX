@@ -1,26 +1,33 @@
-// 分发路由
 const express = require('express')
+
+// 引入页面返回控制器
+const pagesController = require('./controllers/pagesController.js')
+const userController = require('./controllers/userController.js')
+const postController = require('./controllers/postController.js')
 var router = express.Router()
-const pagesController = require('./controllers/pagesController')
-const userController = require('./controllers/userController')
-// 前端展示页
-router.get('/', pagesController.getIndex)
-    .get('/detail',pagesController.getDetail)
-    .get('/list',pagesController.getList)
-    // 后台管理页
-    .get('/admin/index.html',pagesController.getgetAdminIndexList)
-    .get('/admin/categories.html',pagesController.getAdminCategories)
-    // 登录页
-    .get('/admin/login',pagesController.getAdminLogin)
-    .get('/admin/comments.html',pagesController.getAdminComments)
-    .get('/admin/nav-menus.html',pagesController.getAdminNavMenus)
-    .get('/admin/passwordReset',pagesController.getAdminPasswordReset)
-    .get('/admin/post-add.html',pagesController.getAdminPostAdd)
-    .get('/admin/posts.html',pagesController.getAdminPosts)
-    .get('/admin/profile.html',pagesController.getAdminProfile)
-    .get('/admin/settings.html',pagesController.getAdminSettings)
-    .get('/admin/slides.html',pagesController.getAdminSlides)
-    .get('/admin/users.html',pagesController.getAdminUsers)
-    //  用户数据请求
-    .post('/login',userController.userController)
-module.exports = router;
+
+// 配置路由
+// 路由中间件的回调函数，不是我们自己调用的，而是服务器响应请求时进行调用的
+// 在调用的时候，会给这个回调函数传入两个参数：req,res
+// 后台页面
+router.get('/admin',pagesController.getAdminIndexPage)
+      .get('/admin/categories',pagesController.getAdminCategoriesPage)
+      .get('/admin/login',pagesController.getAdminLoginPage)
+      .get('/admin/comments',pagesController.getCommentsPage)
+      .get('/admin/nav-menus',pagesController.getNavMenusPage)
+      .get('/admin/password-reset',pagesController.getPasswordResetPage)
+      .get('/admin/post-add',pagesController.getPostAddPage)
+      .get('/admin/posts',pagesController.getPostsPage)
+      .get('/admin/profile',pagesController.getProfilePage)
+      .get('/admin/slides',pagesController.getSlidesPage)
+      .get('/admin/settings',pagesController.getSettingsPage)
+      .get('/admin/users',pagesController.getUsersPage)
+// 前台页面
+      .get('/',pagesController.getIndexPage)
+
+      // 业务处理路由
+      .post('/login',userController.login)
+      .get('/getAllPost',postController.getAllPost)
+
+// 暴露
+module.exports = router

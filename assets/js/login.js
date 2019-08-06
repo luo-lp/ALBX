@@ -1,28 +1,19 @@
-$(function () {
-    $('.btn-primary').on('click', function () {
-        if($('#email').val().trim().length===0){
-            alert('请输入用户名')
-            return
-        }
-        if($('#password').val().trim().length===0){
-            alert('请输入密码')
-            return
-        }
-        let USN = $('#email').val().trim()
-        let PSW = $('#password').val().trim()
+$(function(){
+    $('.btnLogin').on('click',function(){
         $.ajax({
-            type: 'POST',
-            url: '/login',
-            data: {
-                USN,
-                PSW
-            },
-            success: function (res) {
-                if (res.code === 200) {
-                    // alert(res.msg);
-                    location.href = '/admin/index.html'
-                } else {
-                    alert(res.msg);
+            type:'post',
+            url:'/login',
+            dataType:'json',
+            // serialize可以获取指定表单中所有拥有name属性的表单元素的value值
+            data:$('form').serialize(),
+            success:function(res){
+                console.log(res)
+                if(res.code == 400){
+                    $('.alert-danger > span').text(res.msg)
+                    $('.alert-danger').fadeIn(500).delay(2000).fadeOut(500)
+                }else{
+                    // 进行页面跳转
+                    location.href='/admin'
                 }
             }
         })
