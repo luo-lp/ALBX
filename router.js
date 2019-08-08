@@ -4,6 +4,7 @@ const express = require('express')
 const pagesController = require('./controllers/pagesController.js')
 const userController = require('./controllers/userController.js')
 const postController = require('./controllers/postController.js')
+const cateController = require('./controllers/cateController.js')
 var router = express.Router()
 
 // 配置路由
@@ -28,6 +29,7 @@ router.get('/admin',pagesController.getAdminIndexPage)
       // 业务处理路由
       .post('/login',userController.login)
       .get('/getAllPost',postController.getAllPost)
+      .get('/getAllCate',cateController.getAllCate)
 
 // 暴露
 module.exports = router
