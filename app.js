@@ -26,9 +26,6 @@ app.use(session(
 // extended: false：将参数字符串转换为对象
 app.use(bodyParser.urlencoded({ extended: false }))
 // 后期你可能会传递json格式字符串
-
-
-
 app.use(bodyParser.json())
 
 // 5.托管静态资源
